@@ -16,12 +16,32 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    */
 }
 
+//add validation to notify the user if they forgot to enter a value for any one of the fields.
+
 function validateInput(testInput) {
+   let pilotNameInput = document.querySelector("input[name=pilotName]");
+   let copilotNameInput = document.querySelector("input[name=copilotName]");
+   let fuelLevel = document.querySelector("input[name=fuelLevel]");
+   let cargoMass = document.querySelector("input[name=cargoMass]");
+
+   if(pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
+    alert("Empty");
+   }else if(typeof pilotNameInput !== 'string' || typeof copilotNameInput !== 'string'){
+    alert('Not A Number');
+   }else if (isNaN(fuelLevel) || isNaN(cargoMass)){
+    alert('Is a Number');
+   }
+
    
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+   let form = document.querySelector('form');
+   form.addEventListener('submit', function(event){
+    validateInput();
+    event.preventDefault();
+
+   })
 }
 
 async function myFetch() {
